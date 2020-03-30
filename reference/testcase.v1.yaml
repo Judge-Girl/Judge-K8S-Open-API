@@ -1,0 +1,9 @@
+title: TestCase
+type: object
+properties:
+  id:
+    type: number
+  input:
+    type: string
+  output:
+    type: string
