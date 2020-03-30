@@ -1,0 +1,12 @@
+openapi: 3.0.0
+info:
+  title: streaming-service
+  version: '1.0'
+  contact:
+    name: Johnny G.C. (Waterball)
+    email: johnny850807@gmail.com
+servers:
+  - url: 'http://localhost:3000'
+paths: {}
+components:
+  schemas: {}

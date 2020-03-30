@@ -1,0 +1,9 @@
+openapi: '3.0.0'
+info:
+  title: judge-k8s-web
+  version: '1.0'
+servers:
+- url: http://localhost:3000
+paths: {}
+components:
+  schemas: {}
