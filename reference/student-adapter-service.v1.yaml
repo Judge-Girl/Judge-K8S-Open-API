@@ -12,6 +12,49 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                studentId:
+                  type: string
+                password:
+                  type: string
     parameters: []
+  '/api/students/{studentId}':
+    parameters:
+      - type: string
+        name: studentId
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ./student.v1.yaml
+      operationId: get-api-students-studentId
+      security:
+        - JWT Token: []
 components:
   schemas: {}
+  securitySchemes:
+    JWT Token:
+      type: http
+      scheme: Bearer
+      description: 'Include `Bearer ${JWT token}` add the `Authorization` header in every secured request.'

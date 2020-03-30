@@ -1,9 +1,35 @@
-openapi: '3.0.0'
+openapi: 3.0.0
 info:
   title: submission-service
   version: '1.0'
 servers:
-- url: http://localhost:3000
-paths: {}
+  - url: 'http://localhost:3000'
+paths:
+  '/api/submissions/{submissionId}':
+    parameters:
+      - type: string
+        name: submissionId
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ./submissions.v1.yaml
+      operationId: get-api-submissions-submissionId
+      security:
+        - JWT Token: []
 components:
   schemas: {}
+  securitySchemes:
+    JWT Token:
+      type: http
+      scheme: Bearer
+      description: 'Include `Bearer ${JWT token}` add the `Authorization` header in every secured request.'

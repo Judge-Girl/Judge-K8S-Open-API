@@ -1,0 +1,13 @@
+title: Submission
+type: object
+properties:
+  id:
+    type: integer
+  code:
+    type: string
+  judgeSpec:
+    $ref: ./judge-spec.v1.yaml
+  studentId:
+    type: integer
+  problemId:
+    type: integer

@@ -2,7 +2,7 @@ title: Problem
 type: object
 properties:
   id:
-    type: number
+    type: integer
   description:
     type: string
   exampleInput:

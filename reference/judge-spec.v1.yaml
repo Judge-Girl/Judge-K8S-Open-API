@@ -1,0 +1,20 @@
+title: Judge Spec
+type: object
+properties:
+  id:
+    type: integer
+  language:
+    type: string
+    enum:
+      - C
+      - JAVA
+  enviroment:
+    type: string
+    enum:
+      - HADOOP
+      - NVIDIA_GPU
+      - NORMAL
+  cpu:
+    type: string
+  gpu:
+    type: string

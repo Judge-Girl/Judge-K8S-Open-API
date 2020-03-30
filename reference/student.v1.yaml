@@ -1,9 +1,7 @@
-title: TestCase
+title: Student
 type: object
 properties:
   id:
-    type: integer
-  input:
     type: string
-  output:
+  name:
     type: string
