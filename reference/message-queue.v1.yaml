@@ -1,0 +1,35 @@
+openapi: 3.0.0
+info:
+  title: message-queue
+  version: '1.0'
+  description: |-
+    This document describes the AMQP APIs we design for the RabbitMQ.
+
+    Since Open API Spec is not for AMQP, we can only describe the AMQP elements in the HTTP-like way:
+
+    1. HTTP Get path => AMQP Topic
+    2. The URL '/a.{b}.c' => the topic route 'a.{b}.c' where b is a variable
+    3. Request body => Consumer's payload
+    4. Response body => Producer's payload
+servers: []
+paths:
+  'judges.{submissiondId}.complete':
+    parameters:
+      - schema:
+          type: string
+        name: submissiondId
+        in: path
+        required: true
+    get:
+      summary: Judgement completion
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ./judge.v1.yaml
+      operationId: get-judges.-submissiondId-.complete
+components:
+  schemas: {}

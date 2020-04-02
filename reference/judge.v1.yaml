@@ -1,0 +1,16 @@
+title: judge
+type: object
+properties:
+  submissionId:
+    type: integer
+  status:
+    type: string
+  memory:
+    type: integer
+  runtime:
+    type: integer
+required:
+  - submissionId
+  - status
+  - memory
+  - runtime
