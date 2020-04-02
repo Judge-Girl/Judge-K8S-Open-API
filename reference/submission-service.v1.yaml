@@ -3,33 +3,38 @@ info:
   title: submission-service
   version: '1.0'
 servers:
-  - url: 'http://localhost:3000'
+  - url: 'http://localhost:33003'
 paths:
-  '/api/submissions/{submissionId}':
-    parameters:
-      - type: string
-        name: submissionId
-        in: path
-        required: true
-        schema:
-          type: integer
-    get:
-      summary: Your GET endpoint
-      tags: []
+  /api/submissions:
+    post:
+      summary: Submit Code
+      operationId: post-api-submissions
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: ./submission.v1.yaml
-      operationId: get-api-submissions-submissionId
+        '202':
+          description: Accepted
       security:
         - JWT Token: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                studentId:
+                  type: string
+                problemId:
+                  type: integer
+                code:
+                  type: string
+              required:
+                - studentId
+                - problemId
+                - code
+        description: ''
 components:
   schemas: {}
   securitySchemes:
     JWT Token:
       type: http
-      scheme: Bearer
-      description: 'Include `Bearer ${JWT token}` add the `Authorization` header in every secured request.'
+      scheme: bearer
+      description: 'Put the token in the header `Authorization` with the value `Bearer ${token}`. 400 Unauthorized is responded when the token is invalid.'

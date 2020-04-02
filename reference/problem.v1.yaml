@@ -9,3 +9,5 @@ properties:
     type: string
   exampleOutput:
     type: string
+  judgeSpec:
+    $ref: ./judge-spec.v1.yaml

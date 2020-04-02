@@ -3,7 +3,7 @@ info:
   title: student-adapter-service
   version: '1.0'
 servers:
-  - url: 'http://localhost:3000'
+  - url: 'http://localhost:33001'
 paths:
   /api/students/login:
     post:
@@ -19,9 +19,13 @@ paths:
                 properties:
                   token:
                     type: string
+              examples:
+                example:
+                  value:
+                    token: eyJhbGciOiJIUzI1NiJ9.eyJzdHVkZW50SWQiOiJyMTIzNDU2NzgiLCJleHAiOjE1ODU4MDcxNTN9.2_L7au4B40vdcB8P5UNjZ-q8pOhxnULV4vrz_eOzkUg
       requestBody:
         content:
-          application/json:
+          application/x-www-form-urlencoded:
             schema:
               type: object
               properties:
@@ -29,6 +33,9 @@ paths:
                   type: string
                 password:
                   type: string
+            examples: {}
+        description: ''
+      parameters: []
     parameters: []
   '/api/students/{studentId}':
     parameters:
@@ -39,7 +46,7 @@ paths:
         schema:
           type: string
     get:
-      summary: Your GET endpoint
+      summary: Get student info by id
       tags: []
       responses:
         '200':
@@ -49,12 +56,11 @@ paths:
               schema:
                 $ref: ./student.v1.yaml
       operationId: get-api-students-studentId
-      security:
-        - JWT Token: []
+      security: []
 components:
   schemas: {}
   securitySchemes:
     JWT Token:
       type: http
-      scheme: Bearer
-      description: 'Include `Bearer ${JWT token}` add the `Authorization` header in every secured request.'
+      scheme: bearer
+      description: 'Put the token in the header `Authorization` with the value `Bearer ${token}`. 400 Unauthorized is responded when the token is invalid.'
