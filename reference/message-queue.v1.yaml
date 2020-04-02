@@ -7,25 +7,29 @@ info:
 
     Since Open API Spec is not for AMQP, we can only describe the AMQP elements in the HTTP-like way:
 
-    1. HTTP Get path => AMQP Topic
+    1. HTTP path => AMQP Topic
     2. The URL '/a.{b}.c' => the topic route 'a.{b}.c' where b is a variable
-    3. Request body => Consumer's payload
-    4. Response body => Producer's payload
+    3. Response body => payload
 servers: []
 paths:
-  'judges.{submissiondId}.complete':
+  'submission.{submissionId}.judge':
     parameters:
       - schema:
-          type: string
-        name: submissiondId
+          type: integer
+        name: submissionId
         in: path
         required: true
     get:
-      summary: Judgement completion
+      summary: On submission judge completed
       tags: []
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ./judge.v1.yaml
+        '':
           content:
             application/json:
               schema:

@@ -5,8 +5,46 @@ info:
   contact:
     name: Johnny G.C. (Waterball)
     email: johnny850807@gmail.com
+  description: |-
+    This document describes the STOMP (over WebSocket) APIs we design for the Streaming-service.
+
+    Since Open API Spec is not for STOMP , we can only describe the STOMP elements in the HTTP-like way:
+
+    1. HTTP path => STOMP Topic
+    2. The URL '/a/{b}/c' => the topic route '/a/{b}/c' where b is a variable
+    3. Response body => payload
 servers:
-  - url: 'http://localhost:3000'
-paths: {}
+  - url: 'http://localhost:33005'
+paths:
+  '/topic/submissions/{submissionId}/judge':
+    parameters:
+      - schema:
+          type: integer
+        name: submissionId
+        in: path
+        required: true
+    get:
+      summary: On submission judge completed
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  url:
+                    type: string
+                  judge:
+                    $ref: ./judge.v1.yaml
+      operationId: get-topic-submissions-submissionId-judge
+      security:
+        - JWT Token: []
 components:
   schemas: {}
+  securitySchemes:
+    JWT Token:
+      type: http
+      scheme: bearer
+      description: 'Put the token in the header `Authorization` with the value `Bearer ${token}`. 400 Unauthorized is responded when the token is invalid.'
