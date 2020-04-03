@@ -8,8 +8,14 @@ info:
     Since Open API Spec is not for AMQP, we can only describe the AMQP elements in the HTTP-like way:
 
     1. HTTP path => AMQP Topic
-    2. The URL '/a.{b}.c' => the topic route 'a.{b}.c' where b is a variable
+    2. The URL 'a.{b}.c' => the topic route 'a.{b}.c' where b is a variable
     3. Response body => payload
+
+    Topic Exchange:
+
+    Every resource root of path is a **Topic Exchange**, for example:
+    `submission.{submissiondId}.judge` is a path, then this indicates that
+    there is a `submission` Topic exchange.
 servers: []
 paths:
   'submission.{submissionId}.judge':
