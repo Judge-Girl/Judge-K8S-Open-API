@@ -1,9 +1,17 @@
 title: TestCase
 type: object
 properties:
-  id:
+  name:
+    type: string
+  problemId:
     type: integer
-  input:
-    type: string
-  output:
-    type: string
+  timeLimit:
+    type: integer
+  memoryLimit:
+    type: number
+  outputLimit:
+    type: number
+  threadNumberLimit:
+    type: integer
+  grade:
+    type: integer

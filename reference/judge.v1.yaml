@@ -1,16 +1,20 @@
 title: judge
 type: object
 properties:
-  submissionId:
-    type: integer
+  testCaseName:
+    type: string
   status:
     type: string
-  memory:
-    type: integer
   runtime:
     type: integer
+  memory:
+    type: number
+  errorMessage:
+    type: string
+  grade:
+    type: integer
 required:
-  - submissionId
+  - testCaseName
   - status
-  - memory
   - runtime
+  - memory

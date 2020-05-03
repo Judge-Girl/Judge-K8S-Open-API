@@ -18,7 +18,7 @@ info:
     there is a `submission` Topic exchange.
 servers: []
 paths:
-  'submission.{submissionId}.judge':
+  'submissions.{submissionId}.judge':
     parameters:
       - schema:
           type: integer
@@ -39,7 +39,20 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ./judge.v1.yaml
+                type: object
+                properties:
+                  judge:
+                    type: array
+                    items:
+                      $ref: ./judge.v1.yaml
+                  problemTitle:
+                    type: string
+                  problemId:
+                    type: integer
       operationId: get-judges.-submissiondId-.complete
+      description: |-
+        5e943c1735539a163061438c
+        5e943c1735539a163061438c
 components:
   schemas: {}
+  securitySchemes: {}

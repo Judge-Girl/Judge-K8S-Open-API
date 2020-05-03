@@ -5,9 +5,9 @@ info:
 servers:
   - url: 'http://localhost:33003'
 paths:
-  /api/submissions:
+  '/api/problems/{problemId}/students/{studentId}/submissions':
     post:
-      summary: Submit Code
+      summary: Student Submits Code
       operationId: post-api-submissions
       responses:
         '202':
@@ -16,21 +16,116 @@ paths:
         - JWT Token: []
       requestBody:
         content:
-          application/json:
+          multipart/form-data:
             schema:
               type: object
               properties:
-                studentId:
-                  type: string
-                problemId:
-                  type: integer
-                code:
-                  type: string
-              required:
-                - studentId
-                - problemId
-                - code
+                submittedCodes:
+                  $ref: ./submission.v1.yaml
         description: ''
+    parameters:
+      - schema:
+          type: integer
+        name: problemId
+        in: path
+        required: true
+      - schema:
+          type: integer
+        name: studentId
+        in: path
+        required: true
+    get:
+      summary: "Get Student's submissions"
+      operationId: get-api-problems-problemId-students-studentId-submissions
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ./submission.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    - id: '2'
+                      studentId: 1
+                      problemId: 1
+                      judges: []
+                      zippedSubmittedCodeFilesId: '1'
+                      submissionTime: 1586684075122
+                      totalGrade: null
+                    - id: '4'
+                      studentId: 1
+                      problemId: 1
+                      judges: []
+                      zippedSubmittedCodeFilesId: '3'
+                      submissionTime: 1586684076227
+                      totalGrade: null
+      security:
+        - JWT Token: []
+  '/api/problems/{problemId}/students/{studentId}/submissions/{submissionId}':
+    parameters:
+      - schema:
+          type: integer
+        name: problemId
+        in: path
+        required: true
+      - schema:
+          type: integer
+        name: studentId
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: submissionId
+        in: path
+        required: true
+    get:
+      summary: "Get a Student's submission"
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ./submission.v1.yaml
+      operationId: get-api-problems-problemId-students-studentId-submissions-submissionId
+      requestBody: {}
+      security:
+        - JWT Token: []
+  '/api/problems/{problemId}/students/{studentId}/submissions/{submissionId}/zippedSubmittedCodes':
+    parameters:
+      - schema:
+          type: string
+        name: problemId
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: studentId
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: submissionId
+        in: path
+        required: true
+    get:
+      summary: "Get a Student's submission's codes"
+      tags: []
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/zip:
+              schema:
+                type: object
+                properties: {}
+      operationId: get-api-problems-problemId-students-studentId-submissions-submissionId-zippedSubmittedCodes
 components:
   schemas: {}
   securitySchemes:
@@ -38,3 +133,5 @@ components:
       type: http
       scheme: bearer
       description: 'Put the token in the header `Authorization` with the value `Bearer ${token}`. 400 Unauthorized is responded when the token is invalid.'
+security:
+  - JWT Token: []

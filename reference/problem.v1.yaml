@@ -3,11 +3,31 @@ type: object
 properties:
   id:
     type: integer
-  description:
+  title:
     type: string
-  exampleInput:
-    type: string
-  exampleOutput:
+  markdownDescription:
     type: string
   judgeSpec:
     $ref: ./judge-spec.v1.yaml
+  judgePolicyPluginTag:
+    $ref: ./judgeGirlPluginTag.v1.yaml
+  inputFileNames:
+    type: string
+  outputFileNames:
+    type: string
+  tags:
+    type: array
+    items:
+      type: string
+  submittedCodeSpecs:
+    type: array
+    items:
+      $ref: ./submittedCodeSpec.v1.yaml
+  compilation:
+    $ref: ./compilation.v1.yaml
+  zippedProvidedCodesFileId:
+    type: string
+  zippedTestCaseInputsFileId:
+    type: string
+  zippedTestCaseOutputsFileId:
+    type: string

@@ -15,10 +15,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  token:
-                    type: string
+                $ref: '#/components/schemas/loginResponse'
               examples:
                 example:
                   value:
@@ -29,7 +26,7 @@ paths:
             schema:
               type: object
               properties:
-                studentId:
+                account:
                   type: string
                 password:
                   type: string
@@ -46,7 +43,7 @@ paths:
         schema:
           type: string
     get:
-      summary: Get student info by id
+      summary: Get student by id
       tags: []
       responses:
         '200':
@@ -56,9 +53,36 @@ paths:
               schema:
                 $ref: ./student.v1.yaml
       operationId: get-api-students-studentId
-      security: []
+      security:
+        - JWT Token: []
+  /api/students/auth:
+    get:
+      summary: Authenticate a student
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/loginResponse'
+      operationId: get-api-students-auth
+      security:
+        - JWT Token: []
 components:
-  schemas: {}
+  schemas:
+    loginResponse:
+      title: loginResponse
+      type: object
+      properties:
+        id:
+          type: integer
+        account:
+          type: string
+        token:
+          type: string
+        expiryTime:
+          type: number
   securitySchemes:
     JWT Token:
       type: http

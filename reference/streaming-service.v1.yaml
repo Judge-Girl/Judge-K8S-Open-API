@@ -16,11 +16,21 @@ info:
 servers:
   - url: 'http://localhost:33005'
 paths:
-  '/topic/submissions/{submissionId}/judge':
+  '/topic/problems/{problemId}/students/{studentId}/submissions/{submissionId}/judge':
     parameters:
       - schema:
           type: integer
         name: submissionId
+        in: path
+        required: true
+      - schema:
+          type: integer
+        name: problemId
+        in: path
+        required: true
+      - schema:
+          type: integer
+        name: studentId
         in: path
         required: true
     get:
@@ -34,10 +44,12 @@ paths:
               schema:
                 type: object
                 properties:
-                  url:
-                    type: string
                   judge:
                     $ref: ./judge.v1.yaml
+                  problemId:
+                    type: integer
+                  problemTitle:
+                    type: string
       operationId: get-topic-submissions-submissionId-judge
       security:
         - JWT Token: []

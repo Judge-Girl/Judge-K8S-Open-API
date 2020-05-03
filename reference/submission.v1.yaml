@@ -1,0 +1,21 @@
+title: submission
+type: object
+properties:
+  id:
+    type: string
+  studentId:
+    type: integer
+  problemId:
+    type: integer
+  judges:
+    type: array
+    items:
+      $ref: ./judge.v1.yaml
+  zippedSubmittedCodeFilesId:
+    type: string
+  compileErrorMessage:
+    type: string
+  submissionTime:
+    type: number
+  judgeTime:
+    type: number

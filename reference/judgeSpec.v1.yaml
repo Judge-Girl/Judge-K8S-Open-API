@@ -1,0 +1,11 @@
+title: judgeSpec
+type: object
+properties:
+  language:
+    type: string
+  environment:
+    type: string
+  cpu:
+    type: string
+  gpu:
+    type: string

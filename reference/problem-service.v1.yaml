@@ -47,5 +47,107 @@ paths:
                 items:
                   $ref: ./testcase.v1.yaml
       operationId: get-api-problems-problemId-testcases
+      description: ''
+  '/api/problems/{problemId}/zippedProvidedSourceCodes':
+    parameters:
+      - schema:
+          type: integer
+        name: problemId
+        in: path
+        required: true
+    get:
+      summary: Get zipped Provided Codes
+      tags: []
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/zip:
+              schema:
+                type: object
+      operationId: get-api-problems-problemId-sourceCode
+  '/api/problems/{problemId}/zippedTestCaseInputs':
+    parameters:
+      - schema:
+          type: integer
+        name: problemId
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/zip:
+              schema:
+                type: object
+                properties: {}
+          headers: {}
+      operationId: get-api-problems-problemId-zippedTestCaseInputs
+  '/api/problems/{problemId}/zippedTestCaseOutputs':
+    parameters:
+      - schema:
+          type: integer
+        name: problemId
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/zip:
+              schema:
+                type: object
+                properties: {}
+          headers: {}
+      operationId: get-api-problems-problemId-zippedTestCaseOutputs
+  /api/problems/tags:
+    get:
+      summary: Get all problem tags
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+      operationId: get-api-problems-tags
+  /api/problems:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/problem-item'
+      operationId: get-api-problems
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: tag
+    parameters: []
 components:
-  schemas: {}
+  schemas:
+    problem-item:
+      title: problem-item
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string

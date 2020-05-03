@@ -1,0 +1,5 @@
+title: compilation
+type: object
+properties:
+  script:
+    type: string
